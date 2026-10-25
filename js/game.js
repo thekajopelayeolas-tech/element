@@ -1,11 +1,11 @@
 (function () {
   'use strict';
 
-  const { BASE_ELEMENTS, combine, allElements } = window.Recipes;
+  const { BASE_ELEMENTS, combine, allElements, emojiFor } = window.Recipes;
 
   const STORAGE_KEY = 'little-mixer-discovered';
-  const TILE_W = 110; // keep in sync with .tile width in style.css
-  const TILE_H = 40; // keep in sync with .tile height in style.css
+  const TILE_W = 104; // keep in sync with .tile width in style.css
+  const TILE_H = 56; // keep in sync with .tile height in style.css
   const DRAG_THRESHOLD = 5; // pixels the pointer must move before a drag starts
 
   const els = {
@@ -94,8 +94,17 @@
   function makeTile(name, className) {
     const el = document.createElement('div');
     el.className = `tile ${className}`;
-    el.textContent = name;
     el.title = name;
+
+    const emoji = document.createElement('span');
+    emoji.className = 'tile-emoji';
+    emoji.textContent = emojiFor(name);
+
+    const label = document.createElement('span');
+    label.className = 'tile-label';
+    label.textContent = name;
+
+    el.append(emoji, label);
     return el;
   }
 

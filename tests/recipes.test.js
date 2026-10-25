@@ -4,7 +4,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const Recipes = require('../js/recipes.js');
 
-const { BASE_ELEMENTS, RECIPES, combine, allElements } = Recipes;
+const { BASE_ELEMENTS, RECIPES, EMOJI, emojiFor, combine, allElements } = Recipes;
 
 test('combine works regardless of argument order', () => {
   assert.equal(combine('Fire', 'Water'), 'Steam');
@@ -48,3 +48,31 @@ test('allElements includes base elements and every recipe result', () => {
   for (const base of BASE_ELEMENTS) assert.ok(all.has(base));
   for (const [, , result] of RECIPES) assert.ok(all.has(result));
 });
+
+test('the game has exactly 100 elements', () => {
+  assert.equal(allElements().length, 100);
+});
+
+test('every element has its own emoji', () => {
+  for (const name of allElements()) {
+    assert.notEqual(EMOJI[name], undefined, `${name} has no emoji`);
+    assert.notEqual(emojiFor(name), '❔', `${name} fell back to the default emoji`);
+  }
+});
+
+test('emoji entries match element names exactly', () => {
+  assert.deepEqual(Object.keys(EMOJI).sort(), [...allElements()].sort());
+});
+
+test('no two elements share an emoji', () => {
+  const emojis = Object.values(EMOJI);
+  assert.equal(new Set(emojis).size, emojis.length);
+});
+
+test('no recipe uses an element that does not exist', () => {
+  const names = new Set(allElements());
+  for (const [a, b, result] of RECIPES) {
+    assert.ok(names.has(a) && names.has(b) && names.has(result), `${a}+${b}=${result}`);
+  }
+});
+
