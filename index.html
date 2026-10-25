@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Little Mixer</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Little Mixer</h1>
+    <div id="progress">0 / 0 discovered</div>
+    <button id="reset-btn" type="button">Reset</button>
+  </header>
+
+  <main>
+    <aside id="palette">
+      <input id="search" type="search" placeholder="Search elements..." autocomplete="off">
+      <div id="palette-list"></div>
+    </aside>
+
+    <section id="workspace" aria-label="Mixing area">
+      <p id="hint" class="hint">Drag elements here, then drop one onto another to combine them. Click an element in the list to add it to the middle.</p>
+    </section>
+  </main>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/recipes.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>

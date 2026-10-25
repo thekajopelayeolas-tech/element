@@ -1,0 +1,10 @@
+{
+  "name": "little-mixer",
+  "version": "1.0.0",
+  "description": "A Little Alchemy-style element combining game",
+  "private": true,
+  "scripts": {
+    "test": "node --test tests/recipes.test.js"
+  },
+  "license": "UNLICENSED"
+}
